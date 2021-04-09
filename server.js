@@ -4,15 +4,15 @@ const port = 3000;
 
 let guitars = [
     {
-        brand: "fender",
-        model: "telecaster 62",
-        color: "sunburst",
+        brand: "Fender",
+        model: "Telecaster 62",
+        color: "Sunburst",
         id: 1
     },
     {
-        brand: "rickenbacker",
+        brand: "Rickenbacker",
         model: "360",
-        color: "sunburst",
+        color: "Sunburst",
         id: 2 
     }
 ];
@@ -23,10 +23,12 @@ app.use(express.json());
 app.get('/api', (req, res) => {
     res.send('Hello World');
 })
+
 // Get all guitars
 app.get('/api/guitars', (req, res) => {
     res.json(guitars);
 })
+
 // Get one guitar
 app.get('/api/guitars/:id', (req,res) => {
     const id = req.params.id
@@ -39,20 +41,44 @@ app.get('/api/guitars/:id', (req,res) => {
     }
     res.json(foundGuitar)
 })
+
 // Create a guitar
 app.post('/api/guitars', (req, res) => {
-    guitars.push(req.body);
-    res.status(201).json(req.body);
+    const brandToSave = req.body.brand
+    const modelToSave = req.body.model
+    const colorToSave = req.body.color
+
+    let idToSave = 0
+    guitars.forEach((guitar) => {
+        if(guitar.id > idToSave) {
+            idToSave = guitar.id
+        }
+    })
+    idToSave++
+    
+    guitars.push({
+        brand: brandToSave,
+        model: modelToSave,
+        color: colorToSave,
+        id: idToSave
+    })
+
+    res.json({
+        status: "New guitar saved"
+    })
 })
+
 // Update a guitar
 app.put('/api/guitars/:id', (req, res) => {
     guitars = guitars.map((guitar) => guitar.id === Number(req.params.id) ? req.body : guitar);
     res.status(200).json(req.body);
 });
+
 // Delete a guitar
 app.delete('/api/guitars/:id', (req, res) => {
     guitars = guitars.filter((guitar) => guitar.id !== Number(req.params.id));
     res.status(204).json({});
 })
+
 // Server
 app.listen(port, () => console.log(`server is running on http://localhost:${port}`));

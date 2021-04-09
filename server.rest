@@ -12,9 +12,8 @@ Content-Type: application/json
 
 {
     "brand": "Gretsch",
-    "model": "Nashville",
-    "color": "Orange" ,
-    "id": 3
+    "model": "Nashville 6120",
+    "color": "Orange"
 }
 
 ###
@@ -22,12 +21,12 @@ PUT   http://localhost:3000/api/guitars/1
 Content-Type: application/json
 
 {
-    "brand": "fender",
-    "model": "telecaster 62",
-    "color": "white",
+    "brand": "Fender",
+    "model": "Telecaster 62",
+    "color": "White",
     "id": 1
 }
 
 ###
-DELETE  http://localhost:3000/api/guitars/1
+DELETE  http://localhost:3000/api/guitars/2
 Content-Type: application/json
