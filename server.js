@@ -19,4 +19,28 @@ let guitars = [
 
 app.use(express.json());
 
-app.listen(port, () => console.log(`server is running at http://localhost:${port}`));
+// Endpoint test
+app.get('/api', (req, res) => {
+    res.send('Hello World');
+})
+// Get all guitars
+app.get('/api/guitars', (req, res) => {
+    res.json(guitars);
+})
+// Create a guitar
+app.post('/api/guitars', (req, res) => {
+    guitars.push(req.body);
+    res.status(201).json(req.body);
+})
+// Update a guitar
+app.put('/api/guitars/:id', (req, res) => {
+    guitars = guitars.map((guitar) => guitar.id === Number(req.params.id) ? req.body : guitar);
+    res.status(200).json(req.body);
+});
+// Delete a guitar
+app.delete('/api/guitars/:id', (req, res) => {
+    guitars = guitars.filter((guitar) => guitar.id !== Number(req.params.id));
+    res.status(204).json({});
+})
+// Server
+app.listen(port, () => console.log(`server is running on http://localhost:${port}`));
