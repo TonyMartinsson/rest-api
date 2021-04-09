@@ -1,0 +1,30 @@
+GET http://localhost:3000/api
+
+###
+GET http://localhost:3000/api/guitars
+
+###
+POST http://localhost:3000/api/guitars
+Content-Type: application/json
+
+{
+    "brand": "Gretsch",
+    "model": "Nashville",
+    "color": "Orange" ,
+    "id": 3
+}
+
+###
+PUT   http://localhost:3000/api/guitars/1
+Content-Type: application/json
+
+{
+    "brand": "fender",
+    "model": "telecaster 62",
+    "color": "white",
+    "id": 1
+}
+
+###
+DELETE  http://localhost:3000/api/guitars/1
+Content-Type: application/json
