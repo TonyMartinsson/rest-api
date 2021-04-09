@@ -27,6 +27,18 @@ app.get('/api', (req, res) => {
 app.get('/api/guitars', (req, res) => {
     res.json(guitars);
 })
+// Get one guitar
+app.get('/api/guitars/:id', (req,res) => {
+    const id = req.params.id
+
+    const foundGuitar = guitars.find((guitar) => {
+        return guitar.id == id
+    })
+    if(!foundGuitar) {
+        res.status(404).json({error: "Guitar not found!"})
+    }
+    res.json(foundGuitar)
+})
 // Create a guitar
 app.post('/api/guitars', (req, res) => {
     guitars.push(req.body);
