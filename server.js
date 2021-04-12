@@ -19,14 +19,11 @@ let guitars = [
 
 app.use(express.json());
 
-// Endpoint test
-app.get('/api', (req, res) => {
-    res.send('Hello World');
-})
+app.use(express.static('./client'))
 
 // Get all guitars
 app.get('/api/guitars', (req, res) => {
-    res.json(guitars);
+    res.status(200).json(guitars);
 })
 
 // Get one guitar
@@ -37,7 +34,7 @@ app.get('/api/guitars/:id', (req,res) => {
         return guitar.id == id
     })
     if(!foundGuitar) {
-        res.status(404).json({error: "Guitar not found!"})
+        res.status(404).json({error: `This guitar doesn't exist!`})
     }
     res.json(foundGuitar)
 })
@@ -62,22 +59,19 @@ app.post('/api/guitars', (req, res) => {
         color: colorToSave,
         id: idToSave
     })
-
-    res.json({
-        status: "New guitar saved"
-    })
+    res.status(201).json({brandToSave,modelToSave, colorToSave, idToSave})
 })
 
 // Update a guitar
 app.put('/api/guitars/:id', (req, res) => {
     guitars = guitars.map((guitar) => guitar.id === Number(req.params.id) ? req.body : guitar);
-    res.status(200).json(req.body);
+    res.status(204).json(req.body);
 });
 
 // Delete a guitar
 app.delete('/api/guitars/:id', (req, res) => {
     guitars = guitars.filter((guitar) => guitar.id !== Number(req.params.id));
-    res.status(204).json({});
+    res.status(200).json(guitars);
 })
 
 // Server
