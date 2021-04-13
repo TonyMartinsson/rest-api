@@ -65,13 +65,13 @@ app.post('/api/guitars', (req, res) => {
 // Update a guitar
 app.put('/api/guitars/:id', (req, res) => {
     guitars = guitars.map((guitar) => guitar.id === Number(req.params.id) ? req.body : guitar);
-    res.status(204).json(req.body);
+    res.status(200).json(req.body);
 });
 
 // Delete a guitar
 app.delete('/api/guitars/:id', (req, res) => {
     guitars = guitars.filter((guitar) => guitar.id !== Number(req.params.id));
-    res.status(200).json(guitars);
+    res.status(200).json({});
 })
 
 // Server
