@@ -71,7 +71,7 @@ app.put('/api/guitars/:id', (req, res) => {
 // Delete a guitar
 app.delete('/api/guitars/:id', (req, res) => {
     guitars = guitars.filter((guitar) => guitar.id !== Number(req.params.id));
-    res.status(200).json({});
+    res.status(200).json("Guitar with id" + ' ' + req.params.id + ' ' + "was deleted");
 })
 
 // Server
