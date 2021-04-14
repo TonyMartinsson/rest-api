@@ -64,15 +64,24 @@ app.post('/api/guitars', (req, res) => {
 
 // Update a guitar
 app.put('/api/guitars/:id', (req, res) => {
-    guitars = guitars.map((guitar) => guitar.id === Number(req.params.id) ? req.body : guitar);
-    res.status(200).json(req.body);
-});
+    const guitar = guitars.find(g => g.id === parseInt(req.params.id));
+    if(!guitar) {
+        res.status(404).json(`Guitar with id:${req.params.id} not found`)
+        return
+    }
+    guitar.brand = req.body.brand;
+    guitar.model = req.body.model;
+    guitar.color = req.body.color;
+    guitar.id = req.body.id;
+    res.status(200).json(guitar);
+ });
+
 
 // Delete a guitar
 app.delete('/api/guitars/:id', (req, res) => {
     guitars = guitars.filter((guitar) => guitar.id !== Number(req.params.id));
-    res.status(200).json("Guitar with id" + ' ' + req.params.id + ' ' + "was deleted");
-})
+    res.status(200).json(`Guitar with id:${req.params.id} was deleted`);
+});
 
 // Server
 app.listen(port, () => console.log(`server is running on http://localhost:${port}`));
