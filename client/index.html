@@ -9,7 +9,21 @@
     <script defer src="./logic.js"></script>
 </head>
 <body>
-    <h1>Guitar List</h1>
+    <h1>Add or edit guitar</h1>
+    <div class="box">
+        <div class="formBox">
+            <form id="form" onsubmit="saveNewGuitar(event)">
+                <label for="brand">Brand:</label><br>
+                <input type="text" id="brand" name="brand" value="" autofocus required><br>
+                <label for="model">Model:</label><br>
+                <input type="text" id="model" name="model" value="" required><br>
+                <label for="color">Color:</label><br>
+                <input type="text" id="color" name="color" value="" required><br><br>
+                <input class="buttons submitButton" type="submit" value="Submit">
+              </form> 
+        </div>
+    </div>
+    <hr>
     <div>
         <button class="buttons guitarButton" id="fetchGuitars">Guitars</button>
     </div>
