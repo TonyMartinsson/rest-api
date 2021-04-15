@@ -50,11 +50,15 @@ async function getSpecificGuitar(id) {
     console.log(guitar)
 }
 
-async function saveNewGuitar(brand, model, color) {
-    const body = { brand: brand, model: model, color: color }
-
+async function saveNewGuitar(event) {
+    event.preventDefault();
+    let brandInput = document.getElementById('brand').value
+    let modelInput = document.getElementById('model').value
+    let colorInput = document.getElementById('color').value
+    const body = { brand: brandInput, model: modelInput, color: colorInput }
     const newGuitar = await makeRequest("/api/guitars", "POST", body)
-    console.log(newGuitar)
+    document.getElementById("form").reset(); 
+    return false;   
 }
 
 async function updateAGuitar(brand, model, color, id) {
@@ -68,7 +72,6 @@ async function deleteSpecificGuitar(id) {
     const body = { id: id }
     const deletedGuitar = await makeRequest("/api/guitars/" + id, "DELETE", body)
     document.getElementById(id).remove();
-    console.log(deletedGuitar)
 }
 
 async function makeRequest(url, method, body) {    
