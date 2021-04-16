@@ -18,3 +18,7 @@ npm i
 npm start  
 
 Kör appen i utvecklingsläge på http://localhost:3000
+
+# Länk till repo
+
+[Github](https://github.com/TonyMartinsson/rest-api)
