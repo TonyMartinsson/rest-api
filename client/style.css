@@ -60,8 +60,7 @@ label {
   margin-bottom: 4rem;
 }
 .formBox {
-  display: flex;
-  
+  display: flex; 
 }
 .box {
   background: white;
@@ -107,8 +106,7 @@ hr {
   outline:0;
 }
 .submitButton {
-  background-color: blue;
-  
+  background-color: blue; 
 }
 .guitarButton {
   background-color: blue;
@@ -130,6 +128,7 @@ hr {
   -o-animation: fadeIn ease 1.5s;
   -ms-animation: fadeIn ease 1.5s;
 }
+
 @keyframes fadeIn {
   0% {
     opacity:0;
@@ -212,8 +211,7 @@ h3 {
     flex-direction:row;
   }
   .editButton {
-    margin-right: 0.5rem;
-    
+    margin-right: 0.5rem; 
   }
   hr {
     margin-top: 1rem;

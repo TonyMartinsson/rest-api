@@ -48,7 +48,6 @@ async function getAllGuitars() {
 
 async function getSpecificGuitar(id) {
     const guitar = await makeRequest("/api/guitars/" + id, "GET")
-    console.log(guitar)
 }
 
 async function saveNewGuitar(event) {
@@ -66,7 +65,6 @@ async function updateAGuitar(brand, model, color, id) {
     let body = { brand: brand, model: model, color: color, id: id }
 
     const updatedGuitar = await makeRequest("/api/guitars/" + id, "PUT", body)
-    console.log(updatedGuitar)
 }
 
 async function deleteSpecificGuitar(id) {
@@ -83,7 +81,6 @@ async function makeRequest(url, method, body) {
             'Content-Type': 'application/json',
         }
     })
-    console.log(response)
     const result = await response.json();
     return result
 }
