@@ -23,9 +23,9 @@ async function getAllGuitars() {
         const editButton = document.createElement('button')
         const deleteButton = document.createElement('button')
 
-        brandPara.innerHTML = "Brand:" + ' ' +  guitar.brand
-        modelPara.innerHTML = "Model:" + ' ' +   guitar.model
-        colorPara.innerHTML = "Color:" + ' ' +  guitar.color
+        brandPara.innerHTML = "Brand:" + ' ' +  "<b>" + guitar.brand + "</b>"
+        modelPara.innerHTML = "Model:" + ' ' +  "<b>" +  guitar.model + "</b>"
+        colorPara.innerHTML = "Color:" + ' ' + "<b>" +   guitar.color + "</b>"
         editButton.innerHTML = "Edit"
         deleteButton.innerHTML = "Delete"
         
@@ -34,6 +34,7 @@ async function getAllGuitars() {
         div.classList.add("box", "fadeIn");
         editButton.classList.add("buttons", "editButton")
         deleteButton.classList.add("buttons", "deleteButton")
+        buttonDiv.classList.add("buttonDiv")
         div.appendChild(brandPara)
         div.appendChild(modelPara)
         div.appendChild(colorPara)
