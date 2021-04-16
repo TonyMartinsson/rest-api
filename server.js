@@ -12,7 +12,7 @@ let guitars = [
     {
         brand: "Rickenbacker",
         model: "360",
-        color: "Sunburst",
+        color: "Fireglo",
         id: 2 
     }
 ];

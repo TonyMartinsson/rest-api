@@ -1,6 +1,64 @@
 body {
     background: #f9f6e8;
-    color: #453002;
+    color: #333;;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  color: white;
+  height: 6rem;
+  position: fixed; 
+  top: 0; 
+  width: 100%; 
+  padding-left: 2rem;
+  display: flex;
+  align-items: center;
+  z-index:1;
+}
+h1 {
+  font-family: 'Roboto', sans-serif;
+}
+h2 {
+  margin-top: 2rem;
+  margin-left: 2rem;
+}
+h3 {
+  font-weight: lighter;
+}
+input[type=text] {
+  width: 100%;
+  padding: 4px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  outline: none;
+  font-size: 1.1rem;
+  font-weight:100;
+}
+input[type=text]:focus {
+  border: 2px solid #555;
+}
+label {
+  font-size: 1.2rem;
+}
+.formContainer {
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 4rem;
+}
+.formBox {
+  display: flex;
+  
 }
 .box {
     background: white;
@@ -8,24 +66,36 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px;
     
-    border-radius: 25px;
-    border: 1px solid lightgrey;
-    margin-top: 1rem;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+}
+hr{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  box-shadow: rgba(40, 39, 39, 0.2) 0px 3px 15px;
 }
 .buttons {
     border: none;
     color: white;
-    padding: 20px;
+    padding: 14px;
     text-align: center;
     text-decoration: none;
-    border-radius: 12px;
+    border-radius: 4px;
     display: inline-block;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
     margin: 4px 2px;
+    max-width: 4rem;
+    min-width: 6rem;
 
-    opacity: 0.6;
+    opacity: 0.7;
     transition: 0.3s;
     cursor: pointer;
 }
@@ -35,11 +105,19 @@ body {
 .buttons:focus {
   outline:0;
 }
+.submitButton {
+  background-color: blue;
+  
+}
 .guitarButton {
     background-color: blue;
+    margin-top: 8rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 .editButton {
     background-color: orange;
+    margin-right: 1rem;
 }
 .deleteButton {
     background-color: red;
@@ -90,4 +168,33 @@ body {
     100% {
       opacity:1;
     }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    html, body {
+      overflow-x:hidden 
+    } 
+    .box {
+      flex-direction: column;
+      align-items:flex-start;
+      overflow-x: hidden;
+    }
+    h3 {
+      margin-top: 0rem;
+    }
+    .buttonDiv {
+      display: flex;
+      flex-direction: column; 
+    }
+    .editButton {
+      margin-bottom: 0.5rem;
+    }
+  }
+  @media only screen and (max-width: 375px) {
+    .navbar {
+      height: 4rem;
+    }
+    h1 {
+      font-size: 1.5rem;
+    } 
   }
