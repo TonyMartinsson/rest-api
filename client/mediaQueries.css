@@ -1,0 +1,59 @@
+@media only screen and (max-width: 1000px) {
+    html, body {
+      overflow-x:hidden 
+    } 
+    .box {
+      flex-direction: column;
+      align-items:flex-start;
+      overflow-x: hidden;
+      margin-top: 1rem;
+    }
+    h3 {
+      margin-top: 0rem;
+    }
+    .buttonDiv {
+      display: flex;
+      flex-direction: column;
+      margin: 0rem; 
+    }
+    
+    @media only screen and (max-width: 375px) {
+      html, body {
+        overflow-x:hidden 
+      }
+      .navbar {
+        height: 4rem;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      .buttons {
+        padding: 8px;
+        min-width: 5.4rem;
+      }
+      .guitarButton {
+        margin-top: 5.4rem;
+      }
+      .buttonDiv {
+        display: flex;
+        flex-direction:row;
+      }
+      .editButton {
+        margin-right: 0.5rem; 
+      }
+      hr {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+      h2 {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+      .formContainer {
+        margin-top: 1rem;
+      }
+      label {
+        font-size: 1.1rem;
+      }
+    }
+}
