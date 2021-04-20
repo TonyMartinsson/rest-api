@@ -13,6 +13,11 @@ async function getAllGuitars() {
     const guitars = await makeRequest("/api/guitars", "GET")
     const container = document.getElementById('container')
     container.innerHTML = ''
+    if (container.style.display === "none") {
+        container.style.display = "block";
+      } else {
+        container.style.display = "none";
+    }
 
     guitars.map((guitar) => {
         const div = document.createElement('div')
@@ -41,6 +46,8 @@ async function getAllGuitars() {
         div.appendChild(buttonDiv)
         buttonDiv.appendChild(editButton)
         buttonDiv.appendChild(deleteButton)
+
+        
         
         deleteButton.addEventListener("click", () =>  deleteSpecificGuitar(guitar.id));
     })
