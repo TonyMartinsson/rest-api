@@ -7,6 +7,7 @@
     <title>Favorite Guitars</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="modal.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./mediaQueries.css">
     <script defer src="./logic.js"></script>
@@ -20,6 +21,20 @@
     </div>
     <div id="container"></div>
     <hr>
+    <div id="editModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+            <label for="brand">Brand</label><br>
+            <input type="text" id="brandEdit" name="brandEdit" value="" maxlength="30" autofocus required><br>
+            <label for="model">Model</label><br>
+            <input type="text" id="modelEdit" name="modelEdit" value="" maxlength="30" required><br>
+            <label for="color">Color</label><br>
+            <input type="text" id="colorEdit" name="colorEdit" value="" maxlength="20" required><br><br>
+            <input type="button" class="buttons cancelButton" id="cancelButton" value="Cancel">
+            <input type="button" class="buttons submitButton" id="saveButton" value="Save">
+        </div>     
+      </div>
     <h2>Add a guitar</h2>
     <div class="formContainer">
         <div class="formBox">
@@ -30,7 +45,7 @@
                 <input type="text" id="model" name="model" value="" maxlength="30" required><br>
                 <label for="color">Color</label><br>
                 <input type="text" id="color" name="color" value="" maxlength="20" required><br><br>
-                <input class="buttons submitButton" type="submit" value="Submit">
+                <input class="buttons submitButton" type="submit" value="Add">
               </form> 
         </div>
     </div>
