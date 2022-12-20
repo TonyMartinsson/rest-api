@@ -1,93 +1,155 @@
 window.addEventListener("load", initSite);
 
 async function initSite() {
-    await eventListeners()
+  await eventListeners();
 }
 
 async function eventListeners() {
-    let fetchGuitarsButton = document.getElementById('fetchGuitars')
-    fetchGuitarsButton.addEventListener('click',getAllGuitars)
+  const fetchGuitarsButton = document.getElementById("fetchGuitars");
+  fetchGuitarsButton.addEventListener("click", getAllGuitars);
 }
 
 async function getAllGuitars() {
-    const guitars = await makeRequest("/api/guitars", "GET")
-    const container = document.getElementById('container')
-    container.innerHTML = ''
-    if (container.style.display === "none") {
-        container.style.display = "block";
-      } else {
-        container.style.display = "none";
-    }
-
-    guitars.map((guitar) => {
-        const div = document.createElement('div')
-        const buttonDiv = document.createElement('div')
-        const brandPara = document.createElement('h3')
-        const modelPara = document.createElement('h3')
-        const colorPara = document.createElement('h3')
-        const editButton = document.createElement('button')
-        const deleteButton = document.createElement('button')
-
-        brandPara.innerHTML = "Brand:" + ' ' +  "<b>" + guitar.brand + "</b>"
-        modelPara.innerHTML = "Model:" + ' ' +  "<b>" +  guitar.model + "</b>"
-        colorPara.innerHTML = "Color:" + ' ' + "<b>" +   guitar.color + "</b>"
-        editButton.innerHTML = "Edit"
-        deleteButton.innerHTML = "Delete"
-        
-        container.append(div)
-        div.id = guitar.id
-        div.classList.add("box", "fadeIn");
-        editButton.classList.add("buttons", "editButton")
-        deleteButton.classList.add("buttons", "deleteButton")
-        buttonDiv.classList.add("buttonDiv")
-        div.appendChild(brandPara)
-        div.appendChild(modelPara)
-        div.appendChild(colorPara)
-        div.appendChild(buttonDiv)
-        buttonDiv.appendChild(editButton)
-        buttonDiv.appendChild(deleteButton)
-
-        
-        
-        deleteButton.addEventListener("click", () =>  deleteSpecificGuitar(guitar.id));
-    })
+  try {
+    const response = await makeRequest("/api/guitars", "GET");
+    handleResponse(response);
+  } catch (error) {
+    console.error(error);
+    showError("Error fetching guitars");
+  }
 }
 
 async function getSpecificGuitar(id) {
-    const guitar = await makeRequest("/api/guitars/" + id, "GET")
+  try {
+    const response = await makeRequest(`/api/guitars/${id}`, "GET");
+    handleResponse(response);
+  } catch (error) {
+    console.error(error);
+    showError("Error fetching guitar");
+  }
 }
 
 async function saveNewGuitar(event) {
-    event.preventDefault();
-    let brandInput = document.getElementById('brand').value
-    let modelInput = document.getElementById('model').value
-    let colorInput = document.getElementById('color').value
-    const body = { brand: brandInput, model: modelInput, color: colorInput }
-    const newGuitar = await makeRequest("/api/guitars", "POST", body)
-    document.getElementById("form").reset(); 
-    return false;   
+  event.preventDefault();
+  const brandInput = document.getElementById("brand").value;
+  const modelInput = document.getElementById("model").value;
+  const colorInput = document.getElementById("color").value;
+  const body = { brand: brandInput, model: modelInput, color: colorInput };
+  try {
+    const response = await makeRequest("/api/guitars", "POST", body);
+    handleResponse(response);
+  } catch (error) {
+    console.error(error);
+    showError("Error creating new guitar");
+  }
+
+  // Rensa input-fälten
+  const inputs = document.querySelectorAll("#form input");
+  inputs.forEach((input) => {
+    if (input.type === "submit") {
+      input.value = "Add";
+    } else {
+      input.value = "";
+    }
+  });
+
+  // return false;
+}
+
+function showError(message) {
+  const errorDiv = document.createElement("div");
+  errorDiv.innerHTML = message;
+  errorDiv.style.color = "red";
+  document.body.appendChild(errorDiv);
 }
 
 async function updateAGuitar(brand, model, color, id) {
-    let body = { brand: brand, model: model, color: color, id: id }
-
-    const updatedGuitar = await makeRequest("/api/guitars/" + id, "PUT", body)
+  const body = { brand, model, color, id };
+  try {
+    const response = await makeRequest(`/api/guitars/${id}`, "PUT", body);
+    handleResponse(response);
+  } catch (error) {
+    console.error(error);
+    showError("Error updating guitar");
+  }
 }
 
 async function deleteSpecificGuitar(id) {
-    const body = { id: id }
-    const deletedGuitar = await makeRequest("/api/guitars/" + id, "DELETE", body)
-    document.getElementById(id).remove();
+  const body = { id };
+  try {
+    const response = await makeRequest(`/api/guitars/${id}`, "DELETE", body);
+    handleResponse(response);
+  } catch (error) {
+    console.error(error);
+    showError("Error deleting guitar");
+  }
+  document.getElementById(id).remove();
 }
 
-async function makeRequest(url, method, body) {    
+async function makeRequest(url, method, body) {
     const response = await fetch(url, {
-        method: method,
-        body: JSON.stringify(body),
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    })
-    const result = await response.json();
-    return result
-}
+      method,
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.json();
+  }
+
+  
+  function handleResponse(response) {
+      const container = document.getElementById("container");
+      container.innerHTML = "";
+      if (container.style.display === "none") {
+        container.style.display = "block";
+      } else {
+        container.style.display = "none";
+      }
+  
+      let responseArray = [];
+      if (Array.isArray(response)) {
+          responseArray = response;
+      } else {
+          responseArray = [response];
+      }
+  
+      for (const guitar of responseArray) {
+        const { id, brand, model, color } = guitar;
+    
+        const div = document.createElement("div");
+        const buttonDiv = document.createElement("div");
+        const brandPara = document.createElement("h3");
+        const modelPara = document.createElement("h3");
+        const colorPara = document.createElement("h3");
+        const editButton = document.createElement("button");
+        const deleteButton = document.createElement("button");
+    
+        brandPara.innerHTML = `Brand: <b>${brand}</b>`;
+        modelPara.innerHTML = `Model: <b>${model}</b>`;
+        colorPara.innerHTML = `Color: <b>${color}</b>`;
+        editButton.innerHTML = "Edit";
+        deleteButton.innerHTML = "Delete";
+    
+        container.append(div);
+        div.id = id;
+        div.classList.add("box", "fadeIn");
+        editButton.classList.add("buttons", "editButton");
+        deleteButton.classList.add("buttons", "deleteButton");
+        buttonDiv.classList.add("buttonDiv");
+        div.appendChild(brandPara);
+        div.appendChild(modelPara);
+        div.appendChild(colorPara);
+        div.appendChild(buttonDiv);
+        buttonDiv.appendChild(editButton);
+        buttonDiv.appendChild(deleteButton);
+    
+        deleteButton.addEventListener("click", () => deleteSpecificGuitar(id));
+      }
+    }
+
+
+
+  
+  
+
